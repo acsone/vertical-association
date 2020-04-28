@@ -49,20 +49,21 @@ class ProductTemplate(models.Model):
                    ('years', 'years')],
         string="Interval unit", default='years')
 
-    def _correct_vals_membership_type(self, vals, membership_type):
-        if membership_type == 'variable':
-            vals['membership_date_from'] = False
-            vals['membership_date_to'] = False
-        return vals
-
-    @api.model
-    def create(self, vals):
-        self._correct_vals_membership_type(
-            vals, vals.get('membership_type', 'fixed'))
-        return super(ProductTemplate, self).create(vals)
-
-    @api.multi
-    def write(self, vals):
-        self._correct_vals_membership_type(
-            vals, vals.get('membership_type', self.membership_type))
-        return super(ProductTemplate, self).write(vals)
+    # def _correct_vals_membership_type(self, vals, membership_type):
+    #     if membership_type == 'variable':
+    #         vals['membership_date_from'] = False
+    #         vals['membership_date_to'] = False
+    #     return vals
+    #
+    # @api.model
+    # def create(self, vals):
+    #     self._correct_vals_membership_type(
+    #         vals, vals.get('membership_type', 'fixed'))
+    #     return super(ProductTemplate, self).create(vals)
+    #
+    # @api.multi
+    # def write(self, vals):
+    # self.membership_type ---> seriously?
+    #     self._correct_vals_membership_type(
+    #         vals, vals.get('membership_type', self.membership_type))
+    #     return super(ProductTemplate, self).write(vals)
